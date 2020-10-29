@@ -1,6 +1,8 @@
 var myName = document.querySelectorAll(".name");
 var myFullName = document.querySelectorAll(".fullName");
 var titleJob = document.querySelector("#titleJob");
+var desc = document.querySelector("#desc");
+var desc1 = document.querySelector("#desc1");
 var homeImage = document.querySelector("#homeImage");
 var logo = document.querySelector("#logo");
 var titleSection = document.querySelector("#titleSection");
@@ -10,11 +12,23 @@ var expDiv = document.querySelector("#expDiv");
 var expSection = document.querySelector("#experience-area");
 var projectArea = document.querySelector("#projectArea");
 var modalBody = document.querySelector("#modalBody");
+var myPhoto = document.querySelector("#myPhoto");
+var submitComment = document.querySelector("#submitComment");
+var userName = document.querySelector("#userName");
+var comment1 = document.querySelector("#comment1");
+var commentDiv = document.querySelector("#commentDiv");
+// var circle = document.querySelector("#circle");
+// var switch1 = document.querySelector("#switch");
+// var lightOff = document.querySelector("#lightOff");
+// var lost = document.querySelector("#lost");
 
 var jsonData;
 var activeElement;
 var langList = ["python", "cpp", "html", "css", "js", "unknown"];
 var projectList;
+var cursorX = 0;
+var cursorY = 0;
+var circleRad = 85;
 
 fetch("./src/json/data.json")
   .then((response) => response.json())
@@ -32,6 +46,8 @@ fetch("./src/json/data.json")
     logo.setAttribute("src", data.logo);
     homeImage.setAttribute("src", data.homeImage);
     aboutImage.setAttribute("src", data.aboutImage);
+    desc.innerHTML = data.desc;
+    desc1.innerHTML = data.desc1;
 
     langList.forEach((element) => {
       let langDiv = document.createElement("div");
@@ -63,7 +79,7 @@ fetch("./src/json/data.json")
       project.classList.add("card");
       project.classList.add("projectList");
       project.setAttribute("data-toggle", "modal");
-      project.setAttribute("data-target", "#exampleModal");
+      project.setAttribute("data-target", "#projectPreview");
       project.setAttribute("id", element);
 
       project.addEventListener("click", function (event) {
@@ -114,6 +130,8 @@ fetch("./src/json/data.json")
       modalDiv.appendChild(modalImg);
       modalBody.appendChild(modalDiv);
     }
+
+    myPhoto.setAttribute("src", data["myPhoto"]);
     // titleSection.style.background =
     //   "url('./src/Images/computer.png') no-repeat";
     // titleSection.style.backgroundPosition = "5% 75%";
@@ -125,8 +143,144 @@ window.addEventListener("scroll", moveScrollIndicator);
 const scrollIndicatorElt = document.getElementById("scrollIndicator");
 const maxHeight = window.document.body.scrollHeight - window.innerHeight;
 function moveScrollIndicator(e) {
+  console.log("scorll");
   var percentage =
     $(window).scrollTop() / ($(document).height() - $(window).height());
   percentage *= 100;
   scrollIndicatorElt.style.width = percentage + "%";
+  // circle.style.top = cursorY - circleRad + document.body.scrollTop;
+  // circle.style.left = cursorX - circleRad + document.body.scrollLeft;
 }
+
+tinymce.init({
+  selector: "textarea",
+  plugins: "emoticons",
+  toolbar: "emoticons",
+  toolbar_location: "bottom",
+  menubar: false,
+});
+
+//  <div class="comments">
+//   <h5 class="card-title">Kaleab Asfaw <span>(2:54 PM)</span></h5>
+//   <p class="card-text">Liked the design, Great Job.</p>
+// </div>
+
+fetch("./src/json/comments.json")
+  .then((response) => response.json())
+  .then((data) => {
+    lengthJson = Object.keys(data["userInfo"]).length;
+    console.log(data, Object.keys(data["userInfo"]).length);
+    for (let index = 0; index < lengthJson; index++) {
+      const element = data["userInfo"][index];
+      console.log(element);
+      // const element = data["result"][index];
+      let singleComm = document.createElement("div");
+      singleComm.classList.add("comments");
+
+      let commName = document.createElement("h5");
+      commName.classList.add("card-title");
+      commName.innerHTML =
+        element.name + " <span>(" + element.time + ")</span>";
+
+      let commBody = document.createElement("p");
+      commBody.classList.add("card-text");
+      commBody.innerHTML = element.comment;
+
+      singleComm.appendChild(commName);
+      singleComm.appendChild(commBody);
+      commentDiv.appendChild(singleComm);
+    }
+
+    submitComment.addEventListener("click", function (event) {
+      userNameText = userName.value;
+      commentText = tinymce.get("comment1").getContent();
+      console.log(userNameText, commentText);
+    });
+  });
+
+var data123 = {
+  name: "haah",
+  comment: "Hello123",
+  time: "16:00AG",
+};
+
+fetch("http://localhost:3000/userInfo", {
+  method: "POST",
+  body: JSON.stringify(data123),
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+  credentials: "same-origin",
+})
+  .then(function (response) {
+    console.log("Posting");
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+  });
+
+// async function postData(
+//   url = "./src/json/comments.json",
+//   data = {
+//     name: "Kaleab Asfaw1",
+//     comment: "1Hello, I lovef you portfolio. Great work",
+//     time: "19:48 PM",
+//   }
+// ) {
+//   console.log("POSTING");
+//   const response = await fetch(url, {
+//     method: "POST",
+//     body: JSON.stringify(data),
+//   });
+//   return response.json();
+// }
+// postData();
+// ============================== Lost Mode ===============================
+// document.addEventListener("mousemove", function (event) {
+//   cursorX = event.clientX;
+//   cursorY = event.clientY;
+//   // console.log(cursorX, cursorY);
+//   if (cursorY > 66 + circleRad) {
+//     circle.style.top = cursorY - circleRad + document.body.scrollTop;
+//     if (cursorX > 1172 && cursorX < 1342 && cursorY >= 74 && cursorY <= 280) {
+//       switch1.style.display = "block";
+//     } else {
+//       switch1.style.display = "none";
+//     }
+//   }
+//   if (cursorX < 1348 - circleRad) {
+//     circle.style.left = cursorX - circleRad + document.body.scrollLeft;
+//   }
+// });
+
+// switch1.addEventListener("click", function (event) {
+//   switch1.style.top = "50px";
+//   var id = setInterval(frame, 20);
+//   function frame() {
+//     if (parseInt(switch1.style.top) >= 70) {
+//       clearInterval(id);
+//     } else {
+//       switch1.style.top = parseInt(switch1.style.top) + 1 + "px";
+//     }
+//   }
+//   var id = setInterval(frame, 5);
+//   function frame() {
+//     if (parseInt(switch1.style.top) <= -190) {
+//       clearInterval(id);
+//     } else {
+//       switch1.style.top = parseInt(switch1.style.top) - 1 + "px";
+//     }
+//   }
+//   switch1.style.display = "none";
+//   lightOff.style.opacity = "0";
+//   circle.style.backgroundColor = "rgb(187, 187, 187)";
+//   circleRad = 50;
+//   circle.style.width = "100px";
+//   circle.style.height = "100px";
+// });
+
+// setTimeout(function () {
+//   lost.style.opacity = "0";
+// }, 5000);

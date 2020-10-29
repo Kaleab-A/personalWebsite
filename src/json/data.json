@@ -5,6 +5,8 @@
   "logo": "./src/Images/logo4.png",
   "homeImage": "./src/Images/programming.jpg",
   "aboutImage": "./src/Images/aboutImage.jpg",
+  "desc": "I am born in Addis Ababa, Ethiopia. I am 16 years old. Currently, I am a Grade 11 student at <abbr title = 'Kotebe Metropolitan University Menelik I Science Shared Campus' class = 'initialism' > KMUSSC </abbr>, a school of high <abbr title='Primary School Leaving Examination'>PSLE</abbr> scorers from Addis Ababa. I spent most of my free time programming. I enjoy taking part of programing competetions. Other than that I also love cooking and playing chess. ",
+  "desc1": "I am highly motivated and am extremely passionate about learning new thing. I am known for completing projects ahead of deadlines. My favorite subjects that I enjoy at school are ICT and Mathematics. I often struggling in world history.",
   "pythonLogo": "./src/Images/programmingLanguage/pythonLogo.jpg",
   "cppLogo": "./src/Images/programmingLanguage/cppLogo.png",
   "htmlLogo": "./src/Images/programmingLanguage/htmlLogo.png",
@@ -15,16 +17,14 @@
   "project0": "./src/Images/projects/project0.png",
   "project0Title": "Pong Game",
   "project0Desc": "Pong game created using pygame, a python libray.",
-
   "project1": "./src/Images/projects/project1.png",
   "project1Title": "Unity Cube-Sliding Game",
-  "project1Desc": "A game where playe sliding right and left to not get hit my obstacle. I made it up using Unity Game Development Platform",
-
+  "project1Desc": "A game where player sliding right and left to not get hit my obstacle. I made it up using Unity Game Development Platform",
   "project2": "./src/Images/projects/project2.png",
-  "project2Title": "Thresholding Page of a Book",
+  "project2Title": "Thresholding color Page of Book to make it readable",
   "project2Desc": "This is to make a page more readable by using thresholding in python openCV libary.",
-
   "project3": "./src/Images/projects/project3.png",
   "project3Title": "Portfolio Website",
-  "project3Desc": "Personal Website created with HTML, CSS, JS and Bootstrap"
+  "project3Desc": "Personal Website created with HTML, CSS, JS and Bootstrap",
+  "myPhoto": "./src/Images/myPhoto_lg.png"
 }

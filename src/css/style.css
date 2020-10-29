@@ -45,8 +45,6 @@ body {
 
 /* --------------------------- Start Navigation --------------------------- */
 #mainNav {
-  -webkit-box-shadow: 0 8px 6px -6px #999;
-  -moz-box-shadow: 0 8px 6px -6px #999;
   box-shadow: 0 10px 10px -6px #999;
   background-color: white;
 }
@@ -93,7 +91,7 @@ body {
   width: 0%;
   position: fixed;
   top: 67px;
-  z-index: 99;
+  z-index: 1;
 }
 /* --------------------------- End Navigation --------------------------- */
 
@@ -134,7 +132,7 @@ body {
 }
 
 #about-title {
-  margin-top: 20px;
+  margin-top: -20px;
 }
 
 #about-title span {
@@ -213,7 +211,7 @@ body {
 
 .count-area {
   margin-left: 50px;
-  padding-bottom: 200px;
+  padding-bottom: 110px;
 }
 
 #counts {
@@ -256,11 +254,11 @@ body {
   margin: 0 auto;
 }
 
-.card img {
+#projectArea .card img {
   width: 238px;
 }
 
-.card {
+#projectArea .card {
   width: 238px;
   margin-top: 50px;
   transition: transform 1s ease;
@@ -268,22 +266,158 @@ body {
   background-color: rgba(248, 252, 253, 0.973);
 }
 
-.card:hover {
+#projectArea .card:hover {
   transform: scale(1.2);
   box-shadow: 0 10px 10px -6px #999;
   opacity: 1;
 }
 
+.carousel-item img {
+  width: 500px;
+}
+
 /* --------------------------- End Project Section --------------------------- */
-
-/* --------------------------- Start Contact Section --------------------------- */
-
-/* --------------------------- End Contact Section --------------------------- */
 
 /*  Read about display: flex
     justify-content: center
     Scroll Indicator how it works
 */
-.carousel-item img {
-  width: 500px;
+
+/* --------------------------- Start Contant Section --------------------------- */
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 404px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px;
 }
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
+#contactTitle {
+  text-align: center;
+}
+
+.flip-card {
+  box-shadow: 0 10px 10px -6px #999;
+}
+
+li i {
+  color: white;
+}
+
+li i:hover {
+  color: black;
+}
+
+li img {
+  content: url("../Images/codeforcesLogoW.png");
+}
+
+li img:hover {
+  content: url("../Images/codeforcesLogoB.png");
+  color: black;
+}
+
+#contactSection {
+  margin-top: 50px;
+}
+
+#commentSection {
+  margin-left: 30px;
+}
+
+#commentCard {
+  width: 1rem;
+}
+
+.comments {
+  margin-left: 40px;
+}
+
+.comments .card-text {
+  margin-left: 30px;
+}
+
+.comments span {
+  color: #777777;
+  font-size: 15px;
+}
+
+/* --------------------------- End Contant Section --------------------------- */
+
+/* --------------------------- Lost Mode --------------------------- */
+/* #circle {
+  width: 170px;
+  height: 170px;
+  opacity: 0.2;
+  position: absolute;
+  background: white;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 100px;
+  pointer-events: none;
+  z-index: 3;
+  transition: background-color 10s, width 3s, height 3s;
+}
+
+#lightOff {
+  background-color: black;
+  width: 1350px;
+  height: 3000px;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transition: opacity 6s;
+}
+
+#switch {
+  position: fixed;
+  top: 50px;
+  left: 1150px;
+  color: black;
+  z-index: 2;
+  background-color: white;
+  transition: width 2s ease;
+}
+
+#lost {
+  position: fixed;
+  color: rgb(197, 178, 178);
+  left: 40%;
+  top: 50%;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 5s;
+  font-size: 40px;
+} */
