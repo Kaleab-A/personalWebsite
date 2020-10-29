@@ -161,36 +161,30 @@ tinymce.init({
 });
 
 submitComment.addEventListener("click", function (event) {
-  fetch("http://worldclockapi.com/api/json/utc/now")
-    .then((response) => response.json())
-    .then((data) => {
-      const timeMap = new Map(Object.entries(data));
-      let curr = String(timeMap.get("currentDateTime"));
-      curr =
-        curr.split("T")[1].slice(0, 5) + " " + curr.split("T")[0].slice(0, 10);
-      userNameText = userName.value;
-      commentText = tinymce.get("comment1").getContent();
-      if (userNameText == "") userNameText = "Anonymous";
-      if (commentText == "") return;
+  var curr = new Date();
+  curr = String(curr).slice(4, 31);
+  userNameText = userName.value;
+  commentText = tinymce.get("comment1").getContent();
+  if (userNameText == "") userNameText = "Anonymous";
+  if (commentText == "") return;
 
-      let singleComm = document.createElement("div");
-      singleComm.classList.add("comments");
+  let singleComm = document.createElement("div");
+  singleComm.classList.add("comments");
 
-      let commName = document.createElement("h5");
-      commName.classList.add("card-title");
-      commName.innerHTML = userNameText + " <span>(" + curr + ")</span>";
+  let commName = document.createElement("h5");
+  commName.classList.add("card-title");
+  commName.innerHTML = userNameText + " <span>(" + curr + ")</span>";
 
-      let commBody = document.createElement("p");
-      commBody.classList.add("card-text");
-      commBody.innerHTML = commentText;
+  let commBody = document.createElement("p");
+  commBody.classList.add("card-text");
+  commBody.innerHTML = commentText;
 
-      singleComm.appendChild(commName);
-      singleComm.appendChild(commBody);
-      commentDiv.appendChild(singleComm);
-      userName.value = "";
-      tinymce.get("comment1").setContent("");
-      $("#addComment").modal("hide");
-    });
+  singleComm.appendChild(commName);
+  singleComm.appendChild(commBody);
+  commentDiv.appendChild(singleComm);
+  userName.value = "";
+  tinymce.get("comment1").setContent("");
+  $("#addComment").modal("hide");
 });
 
 //  ========= Leave the Comment After this ==========
