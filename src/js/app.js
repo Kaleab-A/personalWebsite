@@ -17,6 +17,7 @@ var submitComment = document.querySelector("#submitComment");
 var userName = document.querySelector("#userName");
 var comment1 = document.querySelector("#comment1");
 var commentDiv = document.querySelector("#commentDiv");
+var addComment = document.querySelector("#addComment");
 // var circle = document.querySelector("#circle");
 // var switch1 = document.querySelector("#switch");
 // var lightOff = document.querySelector("#lightOff");
@@ -30,7 +31,12 @@ var cursorX = 0;
 var cursorY = 0;
 var circleRad = 85;
 
-fetch("./src/json/data.json")
+https: fetch("https://api.jsonbin.io/b/5f9a922d9291173cbca5426c", {
+  headers: {
+    "secret-key":
+      "$2b$10$dvh4iValdopj2Uuuv6.0z.yvT5/Z4.OefRsJIH6didh3.guwl57Ju",
+  },
+})
   .then((response) => response.json())
   .then((data) => {
     myName.forEach((element) => {
@@ -121,10 +127,8 @@ fetch("./src/json/data.json")
       modalDiv = document.createElement("div");
       modalDiv.classList.add("carousel-item");
       modalDiv.classList.add(element);
-      console.log(element, activeElement);
 
       modalImg = document.createElement("img");
-      console.log(element, data[element]);
       modalImg.setAttribute("src", data[element]);
 
       modalDiv.appendChild(modalImg);
@@ -132,9 +136,6 @@ fetch("./src/json/data.json")
     }
 
     myPhoto.setAttribute("src", data["myPhoto"]);
-    // titleSection.style.background =
-    //   "url('./src/Images/computer.png') no-repeat";
-    // titleSection.style.backgroundPosition = "5% 75%";
   });
 
 // Added event listener to the scroll
@@ -143,7 +144,6 @@ window.addEventListener("scroll", moveScrollIndicator);
 const scrollIndicatorElt = document.getElementById("scrollIndicator");
 const maxHeight = window.document.body.scrollHeight - window.innerHeight;
 function moveScrollIndicator(e) {
-  console.log("scorll");
   var percentage =
     $(window).scrollTop() / ($(document).height() - $(window).height());
   percentage *= 100;
@@ -160,83 +160,78 @@ tinymce.init({
   menubar: false,
 });
 
-//  <div class="comments">
-//   <h5 class="card-title">Kaleab Asfaw <span>(2:54 PM)</span></h5>
-//   <p class="card-text">Liked the design, Great Job.</p>
-// </div>
+submitComment.addEventListener("click", function (event) {
+  fetch("http://worldclockapi.com/api/json/utc/now")
+    .then((response) => response.json())
+    .then((data) => {
+      const timeMap = new Map(Object.entries(data));
+      let curr = String(timeMap.get("currentDateTime"));
+      curr =
+        curr.split("T")[1].slice(0, 5) + " " + curr.split("T")[0].slice(0, 10);
+      userNameText = userName.value;
+      commentText = tinymce.get("comment1").getContent();
+      if (userNameText == "") userNameText = "Anonymous";
+      if (commentText == "") return;
 
-fetch("./src/json/comments.json")
-  .then((response) => response.json())
-  .then((data) => {
-    lengthJson = Object.keys(data["userInfo"]).length;
-    console.log(data, Object.keys(data["userInfo"]).length);
-    for (let index = 0; index < lengthJson; index++) {
-      const element = data["userInfo"][index];
-      console.log(element);
-      // const element = data["result"][index];
       let singleComm = document.createElement("div");
       singleComm.classList.add("comments");
 
       let commName = document.createElement("h5");
       commName.classList.add("card-title");
-      commName.innerHTML =
-        element.name + " <span>(" + element.time + ")</span>";
+      commName.innerHTML = userNameText + " <span>(" + curr + ")</span>";
 
       let commBody = document.createElement("p");
       commBody.classList.add("card-text");
-      commBody.innerHTML = element.comment;
+      commBody.innerHTML = commentText;
 
       singleComm.appendChild(commName);
       singleComm.appendChild(commBody);
       commentDiv.appendChild(singleComm);
-    }
-
-    submitComment.addEventListener("click", function (event) {
-      userNameText = userName.value;
-      commentText = tinymce.get("comment1").getContent();
-      console.log(userNameText, commentText);
+      userName.value = "";
+      tinymce.get("comment1").setContent("");
+      $("#addComment").modal("hide");
     });
-  });
+});
 
-var data123 = {
-  name: "haah",
-  comment: "Hello123",
-  time: "16:00AG",
-};
+//  ========= Leave the Comment After this ==========
+//  <div class="comments">
+//   <h5 class="card-title">Kaleab Asfaw <span>(2:54 PM)</span></h5>
+//   <p class="card-text">Liked the design, Great Job.</p>
+// </div>
 
-fetch("http://localhost:3000/userInfo", {
-  method: "POST",
-  body: JSON.stringify(data123),
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  },
-  credentials: "same-origin",
-})
-  .then(function (response) {
-    console.log("Posting");
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-  });
+// fetch("./src/json/comments.json")
+//   .then((response) => response.json())
+//   .then((data) => {
+//     lengthJson = Object.keys(data["userInfo"]).length;
+//     console.log(data, Object.keys(data["userInfo"]).length);
+//     for (let index = 0; index < lengthJson; index++) {
+//       const element = data["userInfo"][index];
+//       console.log(element);
+//       // const element = data["result"][index];
+//       let singleComm = document.createElement("div");
+//       singleComm.classList.add("comments");
 
-// async function postData(
-//   url = "./src/json/comments.json",
-//   data = {
-//     name: "Kaleab Asfaw1",
-//     comment: "1Hello, I lovef you portfolio. Great work",
-//     time: "19:48 PM",
-//   }
-// ) {
-//   console.log("POSTING");
-//   const response = await fetch(url, {
-//     method: "POST",
-//     body: JSON.stringify(data),
+//       let commName = document.createElement("h5");
+//       commName.classList.add("card-title");
+//       commName.innerHTML =
+//         element.name + " <span>(" + element.time + ")</span>";
+
+//       let commBody = document.createElement("p");
+//       commBody.classList.add("card-text");
+//       commBody.innerHTML = element.comment;
+
+//       singleComm.appendChild(commName);
+//       singleComm.appendChild(commBody);
+//       commentDiv.appendChild(singleComm);
+//     }
+
+//     submitComment.addEventListener("click", function (event) {
+//       userNameText = userName.value;
+//       commentText = tinymce.get("comment1").getContent();
+//       console.log(userNameText, commentText);
+//     });
 //   });
-//   return response.json();
-// }
-// postData();
+
 // ============================== Lost Mode ===============================
 // document.addEventListener("mousemove", function (event) {
 //   cursorX = event.clientX;
