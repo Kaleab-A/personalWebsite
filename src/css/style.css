@@ -349,8 +349,12 @@ li img:hover {
   color: black;
 }
 
-#contactSection {
+#contactHead {
   margin-top: 50px;
+}
+
+#contactSection {
+  margin-top: 30px;
 }
 
 #commentSection {
