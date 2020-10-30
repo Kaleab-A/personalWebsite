@@ -31,12 +31,7 @@ var cursorX = 0;
 var cursorY = 0;
 var circleRad = 85;
 
-https: fetch("https://api.jsonbin.io/b/5f9a922d9291173cbca5426c", {
-  headers: {
-    "secret-key":
-      "$2b$10$dvh4iValdopj2Uuuv6.0z.yvT5/Z4.OefRsJIH6didh3.guwl57Ju",
-  },
-})
+fetch("./src/json/data.json")
   .then((response) => response.json())
   .then((data) => {
     myName.forEach((element) => {
