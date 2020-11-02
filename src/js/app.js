@@ -11,25 +11,28 @@ var langSection = document.querySelector("#languages");
 var expDiv = document.querySelector("#expDiv");
 var expSection = document.querySelector("#experience-area");
 var projectArea = document.querySelector("#projectArea");
-var modalBody = document.querySelector("#modalBody");
+var projectPreview = document.querySelector("#projectPreview1");
+var modalContent = document.querySelector("#modalContent");
 var myPhoto = document.querySelector("#myPhoto");
 var submitComment = document.querySelector("#submitComment");
 var userName = document.querySelector("#userName");
 var comment1 = document.querySelector("#comment1");
 var commentDiv = document.querySelector("#commentDiv");
 var addComment = document.querySelector("#addComment");
+var flipCard = document.querySelector("#flipCard");
+var hoverMe = document.querySelector("#hoverMe");
 // var circle = document.querySelector("#circle");
 // var switch1 = document.querySelector("#switch");
 // var lightOff = document.querySelector("#lightOff");
 // var lost = document.querySelector("#lost");
 
 var jsonData;
-var activeElement;
 var langList = ["python", "cpp", "html", "css", "js", "unknown"];
 var projectList;
-var cursorX = 0;
-var cursorY = 0;
-var circleRad = 85;
+var firstTime = true;
+// var cursorX = 0;
+// var cursorY = 0;
+// var circleRad = 85;
 
 fetch("./src/json/data.json")
   .then((response) => response.json())
@@ -74,27 +77,57 @@ fetch("./src/json/data.json")
       const element = "project" + index;
       let projectDiv = document.createElement("div");
       projectDiv.classList.add("col-lg-3");
+      projectDiv.classList.add("col-6");
+      projectDiv.classList.add("col-xs-12");
+      // projectDiv.setAttribute(
+      //   "onclick",
+      //   "window.open('https://www.google.com', '_blank')"
+      // );
       projectDiv.classList.add("cardMain");
 
       let project = document.createElement("div");
       project.classList.add("card");
       project.classList.add("projectList");
       project.setAttribute("data-toggle", "modal");
-      project.setAttribute("data-target", "#projectPreview");
+      project.setAttribute("data-target", "#projectPreview1");
       project.setAttribute("id", element);
 
       project.addEventListener("click", function (event) {
-        var children = modalBody.children;
-        for (var i = 0; i < children.length; i++) {
-          var modalChild = children[i];
-          if (activeElement && modalChild.classList.contains("active")) {
-            modalChild.classList.remove("active");
-          }
-          if (modalChild.classList.contains(element)) {
-            modalChild.classList.add("active");
-          }
-        }
-        activeElement = element;
+        modalContent.innerHTML = "";
+        modalHeader = document.createElement("div");
+        modalHeader.classList.add("modal-header");
+        modalTitle = document.createElement("h5");
+        modalTitle.classList.add("modal-title");
+        modalTitle.setAttribute("id", "projectPreviewLabel");
+        modalTitle.innerHTML = data[element + "Title"];
+        closeButton = document.createElement("button");
+        closeButton.classList.add("close");
+        closeButton.setAttribute("data-dismiss", "modal");
+        closeButton.setAttribute("aria-label", "Close");
+        closeButton.innerHTML = '<span aria-hidden="true">&times;</span>';
+
+        modalHeader.appendChild(modalTitle);
+        modalHeader.appendChild(closeButton);
+        modalContent.appendChild(modalHeader);
+
+        modalBody = document.createElement("div");
+        modalBody.classList.add("modal-body");
+        modalImg = document.createElement("img");
+        modalImg.setAttribute("src", data[element + "gif"]);
+        modalImg.style.width = "465px";
+        modalBody.appendChild(modalImg);
+        modalContent.appendChild(modalBody);
+
+        modalFooter = document.createElement("div");
+        modalFooter.classList.add("modal-footer");
+        modalFooter.classList.add("justify-content-center");
+        modalFooter.innerHTML =
+          "Check out the&nbsp<a href='" +
+          data[element + "Link"] +
+          "' target='_blank'>project</a>.";
+        modalContent.appendChild(modalFooter);
+        $("projectPreview1").hide();
+        console.log("aaaaaa");
       });
 
       let cardImage = document.createElement("img");
@@ -118,24 +151,26 @@ fetch("./src/json/data.json")
       project.appendChild(cardBody);
       projectDiv.appendChild(project);
       projectArea.appendChild(projectDiv);
-
-      modalDiv = document.createElement("div");
-      modalDiv.classList.add("carousel-item");
-      modalDiv.classList.add(element);
-
-      modalImg = document.createElement("img");
-      modalImg.setAttribute("src", data[element]);
-
-      modalDiv.appendChild(modalImg);
-      modalBody.appendChild(modalDiv);
     }
-
     myPhoto.setAttribute("src", data["myPhoto"]);
   });
 
-// Added event listener to the scroll
-window.addEventListener("scroll", moveScrollIndicator);
+flipCard.addEventListener("mouseenter", function (event) {
+  hoverMe.style.backgroundColor = "dodgerblue";
+  hoverMe.style.color = "dodgerblue";
+  hoverMe.style.border = "none";
+  hoverMe.style.marginBottom = "-2px";
+  hoverMe.style.width = "298px";
+});
 
+flipCard.addEventListener("mouseleave", function (event) {
+  hoverMe.style.backgroundColor = "#EFEFEF";
+  hoverMe.style.color = "black";
+  hoverMe.style.marginBottom = "0px";
+  hoverMe.style.width = "300px";
+});
+
+window.addEventListener("scroll", moveScrollIndicator);
 const scrollIndicatorElt = document.getElementById("scrollIndicator");
 const maxHeight = window.document.body.scrollHeight - window.innerHeight;
 function moveScrollIndicator(e) {
@@ -147,40 +182,32 @@ function moveScrollIndicator(e) {
   // circle.style.left = cursorX - circleRad + document.body.scrollLeft;
 }
 
-tinymce.init({
-  selector: "textarea",
-  plugins: "emoticons",
-  toolbar: "emoticons",
-  toolbar_location: "bottom",
-  menubar: false,
-});
+// submitComment.addEventListener("click", function (event) {
+//   var curr = new Date();
+//   curr = String(curr).slice(4, 31);
+//   userNameText = userName.value;
+//   commentText = tinymce.get("comment1").getContent();
+//   if (userNameText == "") userNameText = "Anonymous";
+//   if (commentText == "") return;
 
-submitComment.addEventListener("click", function (event) {
-  var curr = new Date();
-  curr = String(curr).slice(4, 31);
-  userNameText = userName.value;
-  commentText = tinymce.get("comment1").getContent();
-  if (userNameText == "") userNameText = "Anonymous";
-  if (commentText == "") return;
+//   let singleComm = document.createElement("div");
+//   singleComm.classList.add("comments");
 
-  let singleComm = document.createElement("div");
-  singleComm.classList.add("comments");
+//   let commName = document.createElement("h5");
+//   commName.classList.add("card-title");
+//   commName.innerHTML = userNameText + " <span>(" + curr + ")</span>";
 
-  let commName = document.createElement("h5");
-  commName.classList.add("card-title");
-  commName.innerHTML = userNameText + " <span>(" + curr + ")</span>";
+//   let commBody = document.createElement("p");
+//   commBody.classList.add("card-text");
+//   commBody.innerHTML = commentText;
 
-  let commBody = document.createElement("p");
-  commBody.classList.add("card-text");
-  commBody.innerHTML = commentText;
-
-  singleComm.appendChild(commName);
-  singleComm.appendChild(commBody);
-  commentDiv.appendChild(singleComm);
-  userName.value = "";
-  tinymce.get("comment1").setContent("");
-  $("#addComment").modal("hide");
-});
+//   singleComm.appendChild(commName);
+//   singleComm.appendChild(commBody);
+//   commentDiv.appendChild(singleComm);
+//   userName.value = "";
+//   tinymce.get("comment1").setContent("");
+//   $("#addComment").modal("hide");
+// });
 
 //  ========= Leave the Comment After this ==========
 //  <div class="comments">
