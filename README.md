@@ -1,4 +1,4 @@
-# personalWebsite
+# Personal Website
 
 Check out my Portfolio Website here: https://kaleab-a.github.io/personalWebsite/
 
