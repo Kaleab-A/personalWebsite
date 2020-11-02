@@ -276,12 +276,13 @@ body {
   width: 500px;
 }
 
+.cardMain {
+  text-decoration: none;
+}
+.tooltip-inner {
+  width: 350px;
+}
 /* --------------------------- End Project Section --------------------------- */
-
-/*  Read about display: flex
-    justify-content: center
-    Scroll Indicator how it works
-*/
 
 /* --------------------------- Start Contant Section --------------------------- */
 
@@ -425,3 +426,6 @@ li img:hover {
   transition: opacity 5s;
   font-size: 40px;
 } */
+.modal.hidden {
+  display: none;
+}
