@@ -21,18 +21,11 @@ var commentDiv = document.querySelector("#commentDiv");
 var addComment = document.querySelector("#addComment");
 var flipCard = document.querySelector("#flipCard");
 var hoverMe = document.querySelector("#hoverMe");
-// var circle = document.querySelector("#circle");
-// var switch1 = document.querySelector("#switch");
-// var lightOff = document.querySelector("#lightOff");
-// var lost = document.querySelector("#lost");
 
 var jsonData;
 var langList = ["python", "cpp", "html", "css", "js", "unknown"];
 var projectList;
 var firstTime = true;
-// var cursorX = 0;
-// var cursorY = 0;
-// var circleRad = 85;
 
 fetch("./src/json/data.json")
   .then((response) => response.json())
@@ -79,10 +72,6 @@ fetch("./src/json/data.json")
       projectDiv.classList.add("col-lg-3");
       projectDiv.classList.add("col-6");
       projectDiv.classList.add("col-xs-12");
-      // projectDiv.setAttribute(
-      //   "onclick",
-      //   "window.open('https://www.google.com', '_blank')"
-      // );
       projectDiv.classList.add("cardMain");
 
       let project = document.createElement("div");
@@ -127,7 +116,6 @@ fetch("./src/json/data.json")
           "' target='_blank'>project</a>.";
         modalContent.appendChild(modalFooter);
         $("projectPreview1").hide();
-        console.log("aaaaaa");
       });
 
       let cardImage = document.createElement("img");
@@ -178,120 +166,61 @@ function moveScrollIndicator(e) {
     $(window).scrollTop() / ($(document).height() - $(window).height());
   percentage *= 100;
   scrollIndicatorElt.style.width = percentage + "%";
-  // circle.style.top = cursorY - circleRad + document.body.scrollTop;
-  // circle.style.left = cursorX - circleRad + document.body.scrollLeft;
+}
+var commentTable;
+function updateComments() {
+  commentTable = [];
+  function readData() {
+    var data = spData;
+    var rowData = [];
+    for (var r = 0; r < data.length; r++) {
+      var cell = data[r]["gs$cell"];
+      var val = cell["$t"];
+      if (cell.col == 1) {
+        commentTable.push(rowData);
+        rowData = [];
+      }
+      rowData.push(val);
+    }
+    commentTable.push(rowData);
+  }
+  $(document).ready(function () {
+    readData();
+    setTimeout(() => {
+      for (let index = 2; index < commentTable.length; index++) {
+        const element = commentTable[index];
+        appendComment(element[0], element[1], element[2]);
+      }
+    }, 50);
+  });
 }
 
-// submitComment.addEventListener("click", function (event) {
-//   var curr = new Date();
-//   curr = String(curr).slice(4, 31);
-//   userNameText = userName.value;
-//   commentText = tinymce.get("comment1").getContent();
-//   if (userNameText == "") userNameText = "Anonymous";
-//   if (commentText == "") return;
+updateComments();
+setTimeout(() => {
+  location.reload();
+}, 60 * 1000);
 
-//   let singleComm = document.createElement("div");
-//   singleComm.classList.add("comments");
+function appendComment(time, userNameText, commentText) {
+  if (userNameText == "") userNameText = "Anonymous";
+  if (commentText == "") return;
 
-//   let commName = document.createElement("h5");
-//   commName.classList.add("card-title");
-//   commName.innerHTML = userNameText + " <span>(" + curr + ")</span>";
+  let singleComm = document.createElement("div");
+  singleComm.classList.add("comments");
 
-//   let commBody = document.createElement("p");
-//   commBody.classList.add("card-text");
-//   commBody.innerHTML = commentText;
+  let commName = document.createElement("h5");
+  commName.classList.add("card-title");
+  commName.innerHTML = userNameText + " <span>(" + time + ")</span>";
 
-//   singleComm.appendChild(commName);
-//   singleComm.appendChild(commBody);
-//   commentDiv.appendChild(singleComm);
-//   userName.value = "";
-//   tinymce.get("comment1").setContent("");
-//   $("#addComment").modal("hide");
-// });
+  let commBody = document.createElement("p");
+  commBody.classList.add("card-text");
+  commBody.innerHTML = commentText;
 
-//  ========= Leave the Comment After this ==========
-//  <div class="comments">
-//   <h5 class="card-title">Kaleab Asfaw <span>(2:54 PM)</span></h5>
-//   <p class="card-text">Liked the design, Great Job.</p>
-// </div>
-
-// fetch("./src/json/comments.json")
-//   .then((response) => response.json())
-//   .then((data) => {
-//     lengthJson = Object.keys(data["userInfo"]).length;
-//     console.log(data, Object.keys(data["userInfo"]).length);
-//     for (let index = 0; index < lengthJson; index++) {
-//       const element = data["userInfo"][index];
-//       console.log(element);
-//       // const element = data["result"][index];
-//       let singleComm = document.createElement("div");
-//       singleComm.classList.add("comments");
-
-//       let commName = document.createElement("h5");
-//       commName.classList.add("card-title");
-//       commName.innerHTML =
-//         element.name + " <span>(" + element.time + ")</span>";
-
-//       let commBody = document.createElement("p");
-//       commBody.classList.add("card-text");
-//       commBody.innerHTML = element.comment;
-
-//       singleComm.appendChild(commName);
-//       singleComm.appendChild(commBody);
-//       commentDiv.appendChild(singleComm);
-//     }
-
-//     submitComment.addEventListener("click", function (event) {
-//       userNameText = userName.value;
-//       commentText = tinymce.get("comment1").getContent();
-//       console.log(userNameText, commentText);
-//     });
-//   });
-
-// ============================== Lost Mode ===============================
-// document.addEventListener("mousemove", function (event) {
-//   cursorX = event.clientX;
-//   cursorY = event.clientY;
-//   // console.log(cursorX, cursorY);
-//   if (cursorY > 66 + circleRad) {
-//     circle.style.top = cursorY - circleRad + document.body.scrollTop;
-//     if (cursorX > 1172 && cursorX < 1342 && cursorY >= 74 && cursorY <= 280) {
-//       switch1.style.display = "block";
-//     } else {
-//       switch1.style.display = "none";
-//     }
-//   }
-//   if (cursorX < 1348 - circleRad) {
-//     circle.style.left = cursorX - circleRad + document.body.scrollLeft;
-//   }
-// });
-
-// switch1.addEventListener("click", function (event) {
-//   switch1.style.top = "50px";
-//   var id = setInterval(frame, 20);
-//   function frame() {
-//     if (parseInt(switch1.style.top) >= 70) {
-//       clearInterval(id);
-//     } else {
-//       switch1.style.top = parseInt(switch1.style.top) + 1 + "px";
-//     }
-//   }
-//   var id = setInterval(frame, 5);
-//   function frame() {
-//     if (parseInt(switch1.style.top) <= -190) {
-//       clearInterval(id);
-//     } else {
-//       switch1.style.top = parseInt(switch1.style.top) - 1 + "px";
-//     }
-//   }
-//   switch1.style.display = "none";
-//   lightOff.style.opacity = "0";
-//   circle.style.backgroundColor = "rgb(187, 187, 187)";
-//   circleRad = 50;
-//   circle.style.width = "100px";
-//   circle.style.height = "100px";
-// });
-
-// setTimeout(function () {
-//   lost.style.opacity = "0";
-// }, 5000);
+  singleComm.appendChild(commName);
+  singleComm.appendChild(commBody);
+  commentDiv.appendChild(singleComm);
+}
+submitComment.addEventListener("click", function (event) {
+  setTimeout(() => {
+    location.reload();
+  }, 1000);
+});
