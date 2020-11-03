@@ -50,7 +50,7 @@ body {
 }
 
 #logo {
-  height: 50px;
+  height: 60px;
   width: auto;
 }
 
@@ -377,49 +377,12 @@ li img:hover {
 }
 
 /* --------------------------- End Contant Section --------------------------- */
-
-/* --------------------------- Lost Mode --------------------------- */
-/* #circle {
-  width: 170px;
-  height: 170px;
-  opacity: 0.2;
-  position: absolute;
-  background: white;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border-radius: 100px;
-  pointer-events: none;
-  z-index: 3;
-  transition: background-color 10s, width 3s, height 3s;
+/* --------------------------- Start Credit Section --------------------------- */
+#credit {
+  text-align: center;
 }
 
-#lightOff {
-  background-color: black;
-  width: 1350px;
-  height: 3000px;
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  transition: opacity 6s;
+#creditList {
+  width: 700px;
 }
-
-#switch {
-  position: fixed;
-  top: 50px;
-  left: 1150px;
-  color: black;
-  z-index: 2;
-  background-color: white;
-  transition: width 2s ease;
-}
-
-#lost {
-  position: fixed;
-  color: rgb(197, 178, 178);
-  left: 40%;
-  top: 50%;
-  z-index: 1;
-  opacity: 1;
-  transition: opacity 5s;
-  font-size: 40px;
-} */
+/* --------------------------- End Credit Section --------------------------- */

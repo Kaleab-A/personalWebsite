@@ -7,8 +7,6 @@
    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
    <title>Kaleab Asfaw</title>
    <link rel="stylesheet" href="src/css/Bootstrap/css/bootstrap.min.css">
-   <!-- <link rel="stylesheet" href="src/css/Bootstrap/css/bootstrap.css"> -->
-   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Syne+Mono">
    <link rel="stylesheet" href="./src/css/all.min.css">
@@ -47,6 +45,9 @@
                      <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                      </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#credits">Credits</a>
+                     </li>
                   </ul>
                </div>
             </nav>
@@ -83,6 +84,7 @@
       <!-- ======================== End Home Page ======================== -->
       <!-- ======================== Start About Page ======================== -->
       <a id="about"></a>
+      <br>
       <hr>
       <div class="about-me">
          <div class="container-fluid">
@@ -162,40 +164,13 @@
          aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content" id="modalContent">
-               <!-- <div class="modal-header">
-                  <h5 class="modal-title" id="projectPreviewLabel">Project Gallery</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
-               <div class="modal-body" > -->
-                  <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                     <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                     </ol>
-                     <div class="carousel-inner" id="modalBody">
-                     </div>
-                     <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                        <span class="sr-only">Previous</span>
-                     </a>
-                     <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                        <span class="sr-only">Next</span>
-                     </a>
-                  </div> -->
-               <!-- </div>
-               <div class="modal-footer justify-content-center">
-                  <p>This is gallery of my projects.</p>
-               </div> -->
             </div>
          </div>
       </div>
       <!-- ======================== End Project Page ======================== -->
       <!-- ======================== Start Contact Page ======================== -->
       <a id="contact"></a>
+      <br>
       <hr>
       <div class="row" id="contactHead">
          <div class="col-sm-12" id="contactTitle">
@@ -221,7 +196,6 @@
                      <div class="col-lg-8">
                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addComment"> Add
                            Comment</button>
-                        <!-- <input id="giveComment" class="form-control" placeholder="Enter comment..."> -->
                      </div>
                   </div>
                </div>
@@ -264,9 +238,6 @@
          aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
-               <!-- <div class="modal-body">
-                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdCIMJvXAFV1qKlKZEaXOKaG1lwKYZJzWBiHwZumuludb_gkw/viewform?embedded=true" width="480" height="538" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-                  </div> -->
                <div class="modal-header">
                   <h5 class="modal-title">Add Comment</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -282,38 +253,54 @@
                      <input class="form-control" type="text" name="entry.543864157" id="entry.543864157" placeholder="Comment Here...">
                      <hr>
                      <div style="text-align: right;">
-                        <button type="submit" value="Submit" class="btn btn-primary" >Send Message</button>
+                        <button type="submit" value="Submit" class="btn btn-primary" id="submitComment" >Send Message</button>
                      </div>
                      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {}"></iframe>
                   </form>
-                  <!-- <input class="form-control" id="userName" placeholder="User Name">
-                     <br>
-                     <textarea id="comment1" placeholder="Comment Here..."></textarea> -->
                </div>
-                  <!-- <button type="submit" id="submitComment" class="btn btn-primary" value="Submit">Save changes</button> -->
             </div>
          </div>
       </div>
-
       <br><br><br>
       <!-- ======================== End Contact Page ======================== -->
-      <!-- <div id="circle"></div>
-            <div id="lightOff"></div>
-            <h2 id="lost">Lost in the dark <br>Find the switch</h2>
-            <h1><img  id="switch" src="./src/Images/switch.png"></i></h1> -->
+      <!-- ======================== Start Credit Section ======================== -->
+      <a id="credits"></a>
+      <hr>
+      <div class="d-flex justify-content-center">
+         <h1>Credits</h1>
+      </div>
+      <br>
+      <div class="d-flex d-flex justify-content-center" id="credit">
+         <br>
+         <div class="list-group" id="creditList">
+            <a class="list-group-item list-group-item-action active" style="background: linear-gradient(to right, #03DFC0 , #007BFF);">
+               <h3>Photo Credits</h3>
+            </a>
+            <a target="_blank" href="https://www.brandcrowd.com/maker/logo/orange-blue-wing-r-82081" class="list-group-item list-group-item-action">Image by brandcrowd</a>
+            <a target="_blank" href="https://www.freepik.com/free-vector/programming-concept-illustration_7118756.htm#page=1&query=programming&position=19" class="list-group-item list-group-item-action">Image by @stories, Copyright-free</a>
+            <a target="_blank" href="https://www.freepik.com/free-vector/coding-concept-illustration_6572420.htm#page=1&query=programmer&position=3" class="list-group-item list-group-item-action">Image by @stories, Copyright-free</a>
+         </div>
+      </div>
+      <br><br><br>
+      <!-- ======================== End Credit Section ======================== -->
    </div>
- 
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-   </script>
+   
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
       integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous">
    </script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
       integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous">
    </script>
-   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-   <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+   <div id="dataScr">
+      <script>
+         var spData = null;
+         function doData(json) {
+            spData = json.feed.entry;
+         }
+      </script>
+      <script type="module" src="https://spreadsheets.google.com/feeds/cells/11wjCNQwDPQ3c_6zesa7B2eHip4cHSiO57oTVdTf_o5c/1/public/values?alt=json-in-script&callback=doData"></script>
+   </div>
      <script type="text/javascript">
     $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
